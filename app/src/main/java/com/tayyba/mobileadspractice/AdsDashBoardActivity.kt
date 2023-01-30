@@ -17,7 +17,9 @@ class AdsDashBoardActivity : AppCompatActivity() {
             startActivity(Intent(applicationContext, BannersActivity::class.java))
         }
         mBinding.Interstitial.setOnClickListener {
+            showInterstitial(this){
             startActivity(Intent(applicationContext, InterstitialAds::class.java))
+            }
         }
         mBinding.Native.setOnClickListener {
             startActivity(Intent(applicationContext, NativeAdsActivity::class.java))

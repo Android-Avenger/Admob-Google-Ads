@@ -4,4 +4,5 @@
     <string name="interstitial">ca-app-pub-3940256099942544/1033173712</string>
     <string name="native_ads">ca-app-pub-3940256099942544/1033173712</string>
     <string name="show_ads">Show Ads</string>
+    <string name="show_interstitial_ads">Show Interstitial Ads</string>
 </resources>
