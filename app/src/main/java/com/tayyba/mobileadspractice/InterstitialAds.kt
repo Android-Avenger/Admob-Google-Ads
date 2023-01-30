@@ -2,13 +2,22 @@ package com.tayyba.mobileadspractice
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.support.v4.os.IResultReceiver.Default
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.tayyba.mobileadspractice.databinding.ActivityInterstialAdsBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.concurrent.timer
 
 class InterstitialAds : AppCompatActivity() {
 
@@ -23,21 +32,11 @@ class InterstitialAds : AppCompatActivity() {
         mBinding = ActivityInterstialAdsBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        MobileAds.initialize(this)
 
-        MobileAds.setRequestConfiguration(
-            RequestConfiguration.Builder().setTestDeviceIds(listOf("ABCDEF012345")).build()
-        )
-//        val animationView = findViewById<LottieAnimationView>(R.id.animations_view)
-//        animationView.setAnimation("animation.json")
-//        animationView.playAnimation()
-
-//        mBinding.animationsView.setAnimation("loading.json")
-//        mBinding.animationsView.playAnimation()
-
-        mBinding.adsTest.setOnClickListener {
-            displayInterstitial()
+        CoroutineScope(Dispatchers.Main).launch {
+            playAnimation()
         }
+
 
     }
 
@@ -93,5 +92,32 @@ class InterstitialAds : AppCompatActivity() {
         } else {
             Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    suspend fun playAnimation() {
+
+        val animationView = findViewById<LottieAnimationView>(R.id.animation)
+        animationView.setAnimationFromUrl("https://assets4.lottiefiles.com/packages/lf20_vkck9pkv.json")
+        animationView.speed = 0.5f
+        animationView.playAnimation()
+
+        val animation = findViewById<LottieAnimationView>(R.id.animation_welldone)
+        val timer = object : CountDownTimer(2000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+
+                animationView.visibility = View.GONE
+
+                animation.setAnimationFromUrl("https://assets8.lottiefiles.com/packages/lf20_tzgci2yi.json")
+                animation.playAnimation()
+            }
+        }
+        timer.start()
+    }
+
+    override fun onBackPressed() {
+       finish()
     }
 }

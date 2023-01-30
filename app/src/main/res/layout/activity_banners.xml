@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical"
     tools:context=".BannersActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/simple_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        android:layout_margin="10dp"
+        ads:adUnitId="@string/banner_ads" />
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/large_banner"
+        xmlns:ads = "http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize = "LARGE_BANNER"
+        android:layout_margin="10dp"
+        ads:adUnitId = "@string/banner_ads"/>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/medium_banner"
+        xmlns:ads = "http://schemas.android.com/apk/res-auto"
+        android:layout_margin="10dp"
+        ads:adSize = "MEDIUM_RECTANGLE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adUnitId = "@string/banner_ads"/>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/smart_banner"
+        xmlns:ads = "http://schemas.android.com/apk/res-auto"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adUnitId = "@string/banner_ads"
+        ads:adSize = "SMART_BANNER"
+        />
+
+</LinearLayout>
